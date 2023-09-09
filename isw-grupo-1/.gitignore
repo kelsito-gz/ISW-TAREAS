@@ -8,6 +8,8 @@
 
 # Node
 /node_modules
+node_modules/
+/isw-grupo-1/node_modules
 npm-debug.log
 yarn-error.log
 
