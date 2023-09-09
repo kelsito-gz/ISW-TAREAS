@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     BrowserAnimationsModule,
     NgbModule,
     StoreModule.forRoot({}, {})
