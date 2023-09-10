@@ -24,4 +24,4 @@ export const reducers: ActionReducerMap<Exercise1State> = {
   [fromProductDataParts.productDataFeatureKey]: fromProductDataParts.reducer
 };
 
-export const selectTransactionFeatureState = createFeatureSelector<Exercise1State>(exercise1FeatureKey);
+export const selectExercise1FeatureKey = createFeatureSelector<Exercise1State>(exercise1FeatureKey);
