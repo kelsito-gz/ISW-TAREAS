@@ -6,10 +6,12 @@ import { StoreModule } from '@ngrx/store';
 import * as fromExercise1Store from './store';
 import { MenuContainer } from './containers/menu/menu.container';
 import { ExerciseOneRouting } from './exercise-1-routing.module';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
-    MenuContainer
+    MenuContainer,
+    MenuComponent
   ],
   imports: [
     CommonModule,
