@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ExerciseListComponent } from './components/exercise-list/exercise-list.component';
 import { SharedModule } from './shared';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { effects, reducers } from './store';
+import * as fromRouter from './store/reducers/router.reducer';
 
 @NgModule({
   declarations: [
@@ -22,10 +25,14 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserAnimationsModule,
     SharedModule,
     NgbModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: fromRouter.routerFeatureKey,
+      serializer: fromRouter.CustomSerializer
+    })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
