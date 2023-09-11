@@ -6,8 +6,8 @@
 
     <mat-card class="mat-elevation-z8">
       <form [formGroup]="form" class="row wrap justify-content-center g-4 m-5">
-        <div class="col-12 col-md-8">
-          <mat-form-field appearance="outline" class="width-100" color="primary">
+        <div class="col-12">
+          <mat-form-field class="width-100" color="primary">
             <mat-label>Describí el producto que buscas</mat-label>
             <textarea matInput autocomplete="off" formControlName="description"></textarea>
           </mat-form-field>
@@ -18,7 +18,7 @@
                 ¿Es necesario pagar por el producto?<mat-slide-toggle class="mat-slide-toggle-large" (change)="togglePaymentRequired()" [checked]="isAmmountRequired" color="primary"></mat-slide-toggle>
             </div>
             <div class="col-12">
-              <mat-form-field appearance="outline" class="width-100" color="primary">
+              <mat-form-field class="width-100" color="primary">
               <mat-label>Monto</mat-label>
               <input matInput autocomplete="off" formControlName="ammount" />
             </mat-form-field>
@@ -26,17 +26,21 @@
           </div>
         </div>
         <div class="col-12 my-2">
-          <mat-form-field appearance="outline" class="width-100" color="primary">
-            <mat-label>Seleccionar una imagen</mat-label>
-            <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+          <mat-form-field style="width: 100%;">
+            <mat-label>¿Tienes una imagen del producto? (Max 5MB)</mat-label>
+            <button mat-icon-button matPrefix (click)="f_input.click()"><mat-icon>attach_file</mat-icon></button>
+            <input type="text" readonly matInput formControlName="image" />
+            <input type="file" multiple hidden #f_input accept="image/png, image/jpeg" (change)="handleFileInputChange(f_input.files)"/>
           </mat-form-field>
-          <div class="image-preview" [style.background-image]="imageUrl ? 'url(' + imageUrl + ')' : 'none'"></div>
+        </div>
+        <div class="col-12 row justify-content-center align-content-center">
+          <img [src]="imageUrl" *ngIf="imageUrl" alt="Imagen cargada" />
         </div>
       </form>
     </mat-card>
 
     <div class="row sticky-button justify-content-center mx-0 px-0">
-      <button class="col-11 btn btn-lg">CONFIRMAR MI PEDIDO</button>
+      <button class="btn btn-lg">TERMINÉ DE ELEGÍR MI PRODUCTO</button>
     </div>
   </div>
 </div>
