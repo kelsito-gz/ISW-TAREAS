@@ -30,14 +30,15 @@ export class ProductDataComponent implements OnInit {
 
   togglePaymentRequired() {
     this.isAmmountRequired = !this.isAmmountRequired;
+    this.ammount.reset();
     if (!this.isAmmountRequired) {
-      // Si no es necesario pagar, establece el campo "ammount" como no requerido
-      this.form.get('ammount').clearValidators();
+      this.ammount.clearValidators();
+      this.ammount.disable();
     } else {
-      // Si es necesario pagar, vuelve a establecer el campo "ammount" como requerido
-      this.form.get('ammount').setValidators([Validators.required]);
+      this.ammount.setValidators([Validators.required]);
+      this.ammount.enable();
     }
-    this.form.get('ammount').updateValueAndValidity();
+    this.ammount.updateValueAndValidity();
   }
 
   file_store: FileList;
