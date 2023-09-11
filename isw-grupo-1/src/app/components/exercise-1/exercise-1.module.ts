@@ -11,15 +11,31 @@ import { ProductDataContainer } from './containers/product-data/product-data.con
 import { CustomerAdressContainer } from './containers/customer-adress/customer-adress.container';
 import { BusinessAdressContainer } from './containers/business-adress/business-adress.container';
 import { PaymentContainer } from './containers/payment/payment.container';
+import { ProductDataComponent } from './components/product-data/product-data.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { CustomerAdressComponent } from './components/customer-adress/customer-adress.component';
+import { BusinessAdressComponent } from './components/business-adress/business-adress.component';
+
+const containers = [
+  ProductDataContainer,
+  CustomerAdressContainer,
+  BusinessAdressContainer,
+  PaymentContainer,
+  MenuContainer
+]
+
+const components = [
+  MenuComponent,
+  ProductDataComponent,
+  PaymentComponent,
+  CustomerAdressComponent,
+  BusinessAdressComponent
+]
 
 @NgModule({
   declarations: [
-    MenuContainer,
-    MenuComponent,
-    ProductDataContainer,
-    CustomerAdressContainer,
-    BusinessAdressContainer,
-    PaymentContainer
+    [ ...containers ],
+    [ ...components ]
   ],
   imports: [
     CommonModule,
