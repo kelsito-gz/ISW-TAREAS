@@ -12,3 +12,19 @@ body {
 body {
   background-color: #eaebed !important;
 }
+
+.sticky-button {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0; /* Espaciado interno */
+  text-align: center;
+  z-index: 999; /* Asegura que el botón esté por encima de otros elementos */
+}
+.sticky-button button {
+  background-color: #01A7C2;
+  color: white;
+}
+.width-100 {
+  width: 100%;
+}
