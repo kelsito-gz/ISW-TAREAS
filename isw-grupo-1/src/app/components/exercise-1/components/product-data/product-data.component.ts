@@ -79,7 +79,8 @@ export class ProductDataComponent implements OnInit {
         description: this.description.value,
         ammount: this.ammount.value,
         imageName: this.image.value,
-        arrayBuffer: this.imageUrl
+        arrayBuffer: this.imageUrl,
+        deliveryAmount: Math.floor(100 + Math.random() * 700)
       } as ProductData)
     }
   }
