@@ -4,4 +4,5 @@ export class ProductData {
   isPaymentRequired: boolean;
   imageName: string;
   arrayBuffer: ArrayBuffer | string;
+  deliveryAmount: number;
 }

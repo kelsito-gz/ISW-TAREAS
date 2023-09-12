@@ -17,14 +17,21 @@
               <mat-form-field class="width-100" color="primary">
                 <mat-label>Monto</mat-label>
                 <input matInput autocomplete="off" mask="0*.00" formControlName="ammountCash" />
+                <mat-error *ngIf="ammountCash.hasError('montoInvalido') && ammountCash.touched">Monto menor al indicado</mat-error>
               </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-5">
+              <mat-label><span>Tu producto: </span>{{productData.description}}</mat-label>
+              <mat-label><span>Monto del producto: </span>{{productData.ammount}}</mat-label>
+              <mat-label><span>Monto del envio: </span>{{productData.deliveryAmount}}</mat-label>
+              <mat-label><span>Total: </span>{{productData.deliveryAmount + productData.ammount}}</mat-label>
             </div>
           </div>
           <div class="col-12 col-md-8">
             <mat-form-field class="width-100" color="primary">
               <mat-label>Número de la tarjeta</mat-label>
               <input matInput autocomplete="off" formControlName="cardNumber" mask="0000 0000 0000 0000" />
-              <mat-error *ngIf="cardNumber.hasError('tarjetaInvalida') && cardNumber.touched"></mat-error>
+              <mat-error *ngIf="cardNumber.hasError('tarjetaInvalida') && cardNumber.touched">Tarjeta invalida</mat-error>
             </mat-form-field>
           </div>
           <div class="col-12 col-md-4">
@@ -55,7 +62,7 @@
       </mat-card>
   
       <div class="row sticky-button justify-content-center mx-0 px-0">
-        <button class="btn btn-lg">CONFIRMAR MI FORMA DE PAGO</button>
+        <button (click)="onPaymentSubmit()" [disabled]="!form.valid" class="btn btn-lg">CONFIRMAR MI FORMA DE PAGO</button>
       </div>
     </div>
   </div>

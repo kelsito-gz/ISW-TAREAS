@@ -1,6 +1,6 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CardPaymentType, CashPaymentType, Payment } from '../../models';
+import { CardPaymentType, CashPaymentType, Payment, ProductData } from '../../models';
 
 @Component({
   selector: 'app-payment',
@@ -12,7 +12,9 @@ export class PaymentComponent {
 
   form: FormGroup;
 
-  submit: EventEmitter<Payment> = new EventEmitter<Payment>();
+  @Output() emitPayment: EventEmitter<Payment> = new EventEmitter<Payment>();
+
+  @Input() productData: ProductData;
 
   ngOnInit(): void {
     this.initForm();
@@ -21,13 +23,21 @@ export class PaymentComponent {
   initForm() {
     this.form = this.fb.group({
       isCash: [ false ],
-      ammountCash: [ '' ],
+      ammountCash: [ '', [ this.validarMontoEfectivo ] ],
       cardNumber: [ '', [ Validators.required, this.validarTarjeta ] ],
       cardSecurity: [ '', [ Validators.required ] ],
       fullName: [ '', [ Validators.required ] ],
       expiration: [ '', [ Validators.required, this.validarVencimiento ] ]
     })
     this.ammountCash.disable();
+  }
+
+  validarMontoEfectivo(control: AbstractControl): { [key: string]: boolean } | null {
+    const value = parseFloat(control.value);
+    if (value <= (this.productData.ammount + this.productData.deliveryAmount)) {
+      return { 'montoInvalido': true }
+    }
+    return null;
   }
 
   validarTarjeta(control: AbstractControl): { [key: string]: boolean } | null {
@@ -126,14 +136,14 @@ export class PaymentComponent {
   onPaymentSubmit() {
     if (this.form.valid) {
       if (this.isCash.value) {
-        this.submit.emit({
+        this.emitPayment.emit({
           isCash: true,
           cash: {
             cashAmount: this.ammountCash.value
           } as CashPaymentType
         } as Payment)
       } else {
-        this.submit.emit({
+        this.emitPayment.emit({
           isCash: false,
           card: {
             cardNumber: this.cardNumber.value,

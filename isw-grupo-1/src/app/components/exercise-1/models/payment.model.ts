@@ -1,7 +1,7 @@
 export class Payment {
   isCash: boolean;
-  cash: CashPaymentType;
-  card: CardPaymentType;
+  cash?: CashPaymentType;
+  card?: CardPaymentType;
 }
 
 export class CashPaymentType {
