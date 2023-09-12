@@ -18,4 +18,5 @@ span {
 
 mat-label {
   display: inline-block;
+  overflow: hidden;
 }
