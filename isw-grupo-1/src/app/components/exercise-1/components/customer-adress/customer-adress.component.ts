@@ -24,10 +24,17 @@ export class CustomerAdressComponent {
     this.form = this.fb.group({
       adress: [ '', [ Validators.required ] ],
       number: [ '', [ Validators.required ] ],
-      city: [ '', [ Validators.required ] ],
+      city: [ '', [ Validators.required, this.validatePlace ] ],
       asSoonAsItPosible: [ false ],
       date: [ '', [ Validators.required ]]
     })
+  }
+
+  validatePlace = (control: AbstractControl): { [key: string]: boolean } | null => {
+    if(this.businessAdress.city != control.value) {
+      return { 'ciudadInvalida': true }
+    }
+    return null;
   }
 
   onSoonChange() {

@@ -38,6 +38,7 @@
                 {{ item.description }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="city.hasError('ciudadInvalida') && city.touched">La ciudad debe ser la misma que la del local</mat-error>
           </mat-form-field>
         </div>
         <mat-divider></mat-divider>

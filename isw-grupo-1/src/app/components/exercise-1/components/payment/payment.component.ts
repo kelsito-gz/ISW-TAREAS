@@ -33,7 +33,7 @@ export class PaymentComponent implements OnChanges {
   validarMontoEfectivo = (control: AbstractControl): { [key: string]: boolean } | null => {
     if(this.productData && this.productData != undefined) {
       const value = parseFloat(control.value);
-      if (this.productData && this.productData.ammount && value <= (this.productData.ammount + this.productData.deliveryAmount)) {
+      if (this.productData && this.productData.ammount && value < (this.productData.ammount + this.productData.deliveryAmount)) {
         return { 'montoInvalido': true }
       }
     }
@@ -70,7 +70,7 @@ export class PaymentComponent implements OnChanges {
   
   onTypePaymentChange() {
     if(this.isCash.value) {
-      this.ammountCash.setValidators([ Validators.required ]);
+      this.ammountCash.setValidators([ Validators.required, this.validarMontoEfectivo ]);
       this.cardNumber.clearValidators();
       this.cardSecurity.clearValidators();
       this.fullName.clearValidators();
