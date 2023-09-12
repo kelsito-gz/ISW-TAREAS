@@ -15,6 +15,7 @@ import { ProductDataComponent } from './components/product-data/product-data.com
 import { PaymentComponent } from './components/payment/payment.component';
 import { CustomerAdressComponent } from './components/customer-adress/customer-adress.component';
 import { BusinessAdressComponent } from './components/business-adress/business-adress.component';
+import { NgxMaskModule } from 'ngx-mask'
 
 const containers = [
   ProductDataContainer,
@@ -41,6 +42,7 @@ const components = [
     CommonModule,
     SharedModule,
     ExerciseOneRouting,
+    NgxMaskModule.forRoot(),
     StoreModule.forFeature(fromExercise1Store.exercise1FeatureKey, fromExercise1Store.reducers, { metaReducers: [] })
   ]
 })

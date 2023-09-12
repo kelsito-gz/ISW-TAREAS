@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-payment',
@@ -12,12 +12,15 @@ export class PaymentComponent {
   form: FormGroup;
 
   ngOnInit(): void {
-
+    this.initForm();
   }
 
   initForm() {
     this.form = this.fb.group({
-      
+      cardNumber: [ '', [ Validators.required ] ],
+      cardSecurity: [ '', [ Validators.required ] ],
+      fullName: [ '', [ Validators.required ] ],
+      expiration: [ '', [ Validators.required ] ]
     })
   }
 }
