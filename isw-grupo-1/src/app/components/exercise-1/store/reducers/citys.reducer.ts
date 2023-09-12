@@ -11,26 +11,22 @@ export const initialState: State = {
   citys: [
     {
       id: 1,
-      description: 'Córdoba'
-    } as City,
-    {
-      id: 2,
       description: 'Villa Carlos Paz'
     } as City,
     {
-      id: 3,
+      id: 2,
       description: 'Santa Rosa de Calamuchita'
     } as City,
     {
-      id: 4,
+      id: 3,
       description: 'Villa General Belgrano'
     } as City,
     {
-      id: 5,
+      id: 4,
       description: 'Cosquín'
     } as City,
     {
-      id: 6,
+      id: 5,
       description: 'Nono'
     } as City,
   ]
