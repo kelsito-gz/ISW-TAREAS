@@ -14,7 +14,9 @@
             src="https://elplanetaurbano.com/wp-content/uploads/2023/02/pizza-planeta-urbano-00.jpg"
             alt="Photo of a Shiba Inu"
           >
-          <mat-card-content>
+          <mat-card-content *ngIf="productData.description" class="d-flex flex-column justify-content-center align-content-center">
+            <mat-label><span>Descripción: </span>{{productData.description}}</mat-label>
+            <mat-label><span>Monto: </span>{{productData.ammount}}</mat-label>
           </mat-card-content>
           <mat-card-actions class="d-flex justify-content-center">
             <button [disabled]="productData && productData.description" mat-button mat-raised-button (click)="redirectProductData()">Ir a seleccionar un producto</button>
@@ -30,7 +32,9 @@
             src="https://norr.com/wp-content/uploads/2019/07/Eureka-gallery-01-1920x1080.jpg"
             alt="Photo of a Shiba Inu"
           >
-          <mat-card-content>
+          <mat-card-content *ngIf="businessAdress.street" class="d-flex flex-column justify-content-center align-content-center">
+            <mat-label><span>Dirección: </span>{{ businessAdress.street }}  {{ businessAdress.number }}</mat-label>
+            <mat-label><span>Ciudad: </span>{{ businessAdress.city.description }} </mat-label>
           </mat-card-content>
           <mat-card-actions class="d-flex justify-content-center">
             <button [disabled]="!productData || !productData.description || businessAdress.street" mat-button mat-raised-button (click)="redirectBusinessAdress()">Ir a seleccionar una ubicación</button>
@@ -46,7 +50,10 @@
             src="https://cdn.gobankingrates.com/wp-content/uploads/2017/12/6-Instacart.jpg"
             alt="Photo of a Shiba Inu"
           >
-          <mat-card-content>
+          <mat-card-content *ngIf="customerAdress.street" class="d-flex flex-column justify-content-center align-content-center">
+            <mat-label><span>Dirección: </span>{{ customerAdress.street }}  {{ customerAdress.number }}</mat-label>
+            <mat-label><span>Ciudad: </span>{{ customerAdress.city.description }} </mat-label>
+            <mat-label><span>Fecha de entrega: </span>{{ customerAdress.receiveItSoon ? 'Lo antes posible' : customerAdress.deadline | date: 'dd/MM/yyyy' }}</mat-label>
           </mat-card-content>
           <mat-card-actions class="d-flex justify-content-center">
             <button [disabled]="!businessAdress || !businessAdress.street || customerAdress.street" mat-button mat-raised-button (click)="redirectCustomerAdress()">Ir a seleccionar el destino</button>

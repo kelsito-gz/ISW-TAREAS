@@ -11,3 +11,11 @@ h1 {
 mat-icon {
   vertical-align: middle;
 }
+
+span {
+  font-weight: bold;
+}
+
+mat-label {
+  display: inline-block;
+}
