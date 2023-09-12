@@ -1,12 +1,14 @@
 <div class="row justify-content-center padding-top-bottom-15">
-  <div class="col-lg-10 col-md-11 col-11 container-fluid">
+  <div class="col-lg-8 col-md-11 col-11 container-fluid">
     <div class="mt-5 d-flex justify-content-center">
       <h1 class="cursive">DeliverEat!</h1>
     </div>
 
     <mat-card class="mat-elevation-z8">
-      <mat-card-header><mat-card-title>Hola</mat-card-title></mat-card-header>
-      <form [formGroup]="form" class="row wrap justify-content-center g-4 m-5">
+      <div class="row ml-4 mt-4 px-4">
+        <h2 class="px-5 mb-0 pb-0">¿Donde lo dejamos?</h2>
+      </div>
+      <form [formGroup]="form" class="row wrap justify-content-center g-4 m-5 mt-2">
         <div class="col-12 col-md-8 col-lg-6">
           <mat-form-field class="width-100" color="primary">
             <mat-label>Calle</mat-label>
