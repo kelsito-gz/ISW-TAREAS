@@ -88,7 +88,7 @@ export class PaymentComponent implements OnChanges {
       this.ammountCash.enable();
     } else {
       this.ammountCash.clearValidators();
-      this.cardNumber.setValidators([Validators.required, Validators.pattern('4111[]1111[]1111[]1111')]);
+      this.cardNumber.setValidators([Validators.required, this.validarTarjeta]);
       this.cardSecurity.setValidators([Validators.required]);
       this.fullName.setValidators([Validators.required]);
       this.expiration.setValidators([Validators.required]);
