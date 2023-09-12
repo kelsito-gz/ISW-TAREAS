@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { BusinessAdress, CustomerAdress, Payment, ProductData } from '../../models';
 
 @Component({
   selector: 'exerice-one-menu-component',
@@ -9,6 +10,11 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
   constructor(private router: Router) {
   }
+
+  @Input() productData: ProductData;
+  @Input() customerAdress: CustomerAdress;
+  @Input() businessAdress: BusinessAdress;
+  @Input() payment: Payment;
 
   ngOnInit(): void {
   }

@@ -1,1 +1,6 @@
-<exerice-one-menu-component></exerice-one-menu-component>
+<exerice-one-menu-component
+  [productData]="productData$ | async"
+  [customerAdress]="customerAdress$ | async"
+  [businessAdress]="businessAdress$ | async"
+  [payment]="paymentMethod$ | async"
+></exerice-one-menu-component>
