@@ -1,1 +1,4 @@
-<app-business-adress></app-business-adress>
+<app-business-adress
+  (submit)="onBusinessAdressSubmit($event)"
+  [citys]="citys$ | async"
+></app-business-adress>
