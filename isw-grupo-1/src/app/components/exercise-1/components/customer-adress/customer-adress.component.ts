@@ -13,6 +13,8 @@ export class CustomerAdressComponent {
   @Input() citys: City[];
   @Input() businessAdress: BusinessAdress;
   @Output() submit: EventEmitter<CustomerAdress> = new EventEmitter<CustomerAdress>();
+  maxDate: Date;
+  today: Date;
 
   form: FormGroup;
 
@@ -21,6 +23,9 @@ export class CustomerAdressComponent {
   }
 
   initForm() {
+    this.maxDate = new Date();
+    this.maxDate.setDate(this.maxDate.getDate() + 7);
+    this.today = new Date();
     this.form = this.fb.group({
       adress: [ '', [ Validators.required ] ],
       number: [ '', [ Validators.required ] ],
