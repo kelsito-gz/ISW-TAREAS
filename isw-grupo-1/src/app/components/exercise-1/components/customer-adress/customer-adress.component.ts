@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { City } from '../../models';
+import { City, CustomerAdress } from '../../models';
 
 @Component({
   selector: 'app-customer-adress',
@@ -11,6 +11,7 @@ export class CustomerAdressComponent {
   constructor(private fb: FormBuilder) {}
 
   @Input() citys: City[];
+  @Output() submit: EventEmitter<CustomerAdress> = new EventEmitter<CustomerAdress>();
 
   form: FormGroup;
 
@@ -44,7 +45,29 @@ export class CustomerAdressComponent {
     return this.form.get('asSoonAsItPosible');
   }
 
+  get adress(): AbstractControl {
+    return this.form.get('adress');
+  }
+
+  get number(): AbstractControl {
+    return this.form.get('number');
+  }
+
+  get city(): AbstractControl {
+    return this.form.get('city');
+  }
+
   get date(): AbstractControl {
     return this.form.get('date');
+  }
+
+  onCustomerAdressSubmit() {
+    this.submit.emit({
+      street: this.adress.value,
+      number: this.number.value,
+      city: this.city.value,
+      receiveItSoon: this.asSoonAsItPosible.value,
+      deadline: this.date.value
+    } as CustomerAdress)
   }
 }
