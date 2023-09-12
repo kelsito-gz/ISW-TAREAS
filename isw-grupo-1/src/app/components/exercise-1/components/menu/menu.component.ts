@@ -16,6 +16,8 @@ export class MenuComponent implements OnInit {
   @Input() businessAdress: BusinessAdress;
   @Input() payment: Payment;
 
+  hasFinished: boolean = false;
+
   ngOnInit(): void {
   }
 
@@ -41,6 +43,10 @@ export class MenuComponent implements OnInit {
     } else {
       return `Pagas con tu Visa terminada en ${this.payment.card.cardNumber.slice(-4)}`
     }
+  }
+
+  submit(){
+    this.hasFinished = true;
   }
 
 }

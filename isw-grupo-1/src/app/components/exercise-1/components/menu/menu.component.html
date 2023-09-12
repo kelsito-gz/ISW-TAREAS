@@ -4,7 +4,7 @@
       <h1 class="cursive">DeliverEat!</h1>
     </div>
 
-    <div class="row wrap justify-content-center g-4 m-5">
+    <div class="row wrap justify-content-center g-4 m-5" *ngIf="!hasFinished">
       <div class="col-12 col-md-6">
         <mat-card>
           <mat-card-header>
@@ -78,8 +78,12 @@
         </mat-card>
       </div>
     </div>
-    <div class="row sticky-button justify-content-center mx-0 px-0">
-      <button [disabled]="!payment.cash && !payment.card" class="col-11 btn btn-lg">CONFIRMAR MI PEDIDO</button>
+    <div class="row sticky-button justify-content-center mx-0 px-0"  *ngIf="!hasFinished">
+      <button (click)="submit()" [disabled]="!payment.cash && !payment.card" class="col-11 btn btn-lg">CONFIRMAR MI PEDIDO</button>
+    </div>
+
+    <div class="row wrap justify-content-center" *ngIf="hasFinished">
+      <h2 class="text-center"><mat-icon>check</mat-icon>Pedido confirmado</h2>
     </div>
   </div>
 </div>
