@@ -24,6 +24,7 @@
             <mat-form-field class="width-100" color="primary">
               <mat-label>Número de la tarjeta</mat-label>
               <input matInput autocomplete="off" formControlName="cardNumber" mask="0000 0000 0000 0000" />
+              <mat-error *ngIf="cardNumber.hasError('tarjetaInvalida') && cardNumber.touched"></mat-error>
             </mat-form-field>
           </div>
           <div class="col-12 col-md-4">

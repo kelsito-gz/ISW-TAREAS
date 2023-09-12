@@ -22,12 +22,21 @@ export class PaymentComponent {
     this.form = this.fb.group({
       isCash: [ false ],
       ammountCash: [ '' ],
-      cardNumber: [ '', [ Validators.required ] ],
+      cardNumber: [ '', [ Validators.required, this.validarTarjeta ] ],
       cardSecurity: [ '', [ Validators.required ] ],
       fullName: [ '', [ Validators.required ] ],
       expiration: [ '', [ Validators.required ] ]
     })
     this.ammountCash.disable();
+  }
+
+  validarTarjeta(control: AbstractControl): { [key: string]: boolean } | null {
+    const visaRegex = /^4\d{15}$/;
+  
+    if (control.value && !visaRegex.test(control.value)) {
+      return { 'tarjetaInvalida': true };
+    }
+    return null;
   }
   
   onTypePaymentChange() {
@@ -50,7 +59,7 @@ export class PaymentComponent {
       this.ammountCash.enable();
     } else {
       this.ammountCash.clearValidators();
-      this.cardNumber.setValidators([Validators.required]);
+      this.cardNumber.setValidators([Validators.required, Validators.pattern('4111[]1111[]1111[]1111')]);
       this.cardSecurity.setValidators([Validators.required]);
       this.fullName.setValidators([Validators.required]);
       this.expiration.setValidators([Validators.required]);
