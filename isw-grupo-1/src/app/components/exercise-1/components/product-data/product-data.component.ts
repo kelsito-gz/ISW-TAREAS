@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ProductData } from '../../models';
 
 @Component({
   selector: 'app-product-data',
@@ -9,6 +9,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 })
 export class ProductDataComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
+
+  @Output() submit: EventEmitter<ProductData> = new EventEmitter<ProductData>();
 
   form: FormGroup;
   isAmmountRequired: boolean = true;
@@ -21,24 +23,9 @@ export class ProductDataComponent implements OnInit {
   initForm() {
     this.form = this.fb.group({
       description: [ '', [ Validators.required ] ],
-      ammount: [ '' ],
-      paymentRequired: [ true ],
+      ammount: [ '', [ Validators.required ] ],
       image: []
     })
-  }
-
-
-  togglePaymentRequired() {
-    this.isAmmountRequired = !this.isAmmountRequired;
-    this.ammount.reset();
-    if (!this.isAmmountRequired) {
-      this.ammount.clearValidators();
-      this.ammount.disable();
-    } else {
-      this.ammount.setValidators([Validators.required]);
-      this.ammount.enable();
-    }
-    this.ammount.updateValueAndValidity();
   }
 
   file_store: FileList;
@@ -74,11 +61,26 @@ export class ProductDataComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  get description(): AbstractControl {
+    return this.form.get('description');
+  }
+
   get ammount(): AbstractControl {
     return this.form.get('ammount');
   }
 
   get image(): AbstractControl {
     return this.form.get('image')
+  }
+
+  onProductDataSubmit() {
+    if(this.form.valid) {
+      this.submit.emit({
+        description: this.description.value,
+        ammount: this.ammount.value,
+        imageName: this.image.value,
+        arrayBuffer: this.imageUrl
+      } as ProductData)
+    }
   }
 }
