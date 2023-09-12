@@ -9,6 +9,17 @@
           <h2 class="px-5 mb-0 pb-0">¿Como lo pagas?</h2>
         </div>
         <form [formGroup]="form" class="row wrap justify-content-center g-4 m-5 mt-2">
+          <div class="col-12 d-flex">
+            <div class="col-4">
+              <mat-slide-toggle (change)="onTypePaymentChange()" formControlName="isCash">Pago en efectivo</mat-slide-toggle>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3">
+              <mat-form-field class="width-100" color="primary">
+                <mat-label>Monto</mat-label>
+                <input matInput autocomplete="off" mask="0*.00" formControlName="ammountCash" />
+              </mat-form-field>
+            </div>
+          </div>
           <div class="col-12 col-md-8">
             <mat-form-field class="width-100" color="primary">
               <mat-label>Número de la tarjeta</mat-label>
