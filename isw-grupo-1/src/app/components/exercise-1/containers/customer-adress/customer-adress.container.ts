@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { City, CustomerAdress } from '../../models';
+import { BusinessAdress, City, CustomerAdress } from '../../models';
 import { setBusinessAdress } from '../../store/actions/customer-adress.actions';
 import { selectCitys } from '../../store/selectors/citys.selectors';
+import { selectBusinessAdress } from '../../store/selectors/business-adress.selectors';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -14,9 +15,11 @@ export class CustomerAdressContainer implements OnInit {
   constructor(private store: Store, private router: Router) {}
 
   citys$: Observable<City[]>;
+  businessAdress$: Observable<BusinessAdress>;
 
   ngOnInit(): void {
     this.citys$ = this.store.select(selectCitys);
+    this.businessAdress$ = this.store.select(selectBusinessAdress);
   }
 
   onCustomerAdressSubmit(customerAdress: CustomerAdress) {

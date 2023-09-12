@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { City, CustomerAdress } from '../../models';
+import { BusinessAdress, City, CustomerAdress } from '../../models';
 
 @Component({
   selector: 'app-customer-adress',
@@ -11,6 +11,7 @@ export class CustomerAdressComponent {
   constructor(private fb: FormBuilder) {}
 
   @Input() citys: City[];
+  @Input() businessAdress: BusinessAdress;
   @Output() submit: EventEmitter<CustomerAdress> = new EventEmitter<CustomerAdress>();
 
   form: FormGroup;
@@ -62,12 +63,14 @@ export class CustomerAdressComponent {
   }
 
   onCustomerAdressSubmit() {
-    this.submit.emit({
-      street: this.adress.value,
-      number: this.number.value,
-      city: this.city.value,
-      receiveItSoon: this.asSoonAsItPosible.value,
-      deadline: this.date.value
-    } as CustomerAdress)
+    if(this.form.valid) {
+      this.submit.emit({
+        street: this.adress.value,
+        number: this.number.value,
+        city: this.city.value,
+        receiveItSoon: this.asSoonAsItPosible.value,
+        deadline: this.date.value
+      } as CustomerAdress);
+    }
   }
 }
