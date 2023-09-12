@@ -43,6 +43,12 @@
             <mat-form-field class="width-100" color="primary">
               <mat-label>Vencimiento</mat-label>
               <input matInput autocomplete="off" formControlName="expiration" mask="00/00" />
+              <mat-error *ngIf="expiration.hasError('formatoInvalido') && expiration.touched">
+                El formato de vencimiento es inválido.
+              </mat-error>
+              <mat-error *ngIf="expiration.hasError('vencida') && expiration.touched">
+                Esta vencida.
+              </mat-error>
             </mat-form-field>
           </div>
         </form>

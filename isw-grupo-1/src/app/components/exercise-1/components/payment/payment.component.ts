@@ -25,7 +25,7 @@ export class PaymentComponent {
       cardNumber: [ '', [ Validators.required, this.validarTarjeta ] ],
       cardSecurity: [ '', [ Validators.required ] ],
       fullName: [ '', [ Validators.required ] ],
-      expiration: [ '', [ Validators.required ] ]
+      expiration: [ '', [ Validators.required, this.validarVencimiento ] ]
     })
     this.ammountCash.disable();
   }
@@ -35,6 +35,25 @@ export class PaymentComponent {
   
     if (control.value && !visaRegex.test(control.value)) {
       return { 'tarjetaInvalida': true };
+    }
+    return null;
+  }
+
+  validarVencimiento(control: AbstractControl): { [key: string]: boolean } | null {
+    const fecha: string = control.value;
+  
+    if (!/^(0[1-9]|1[0-2])\d{2}$/.test(fecha)) {
+      return { 'formatoInvalido': true };
+    }
+    
+    const today = new Date();
+    const month = today.getMonth()+1;
+    const year = today.getFullYear() % 100;
+    const yearControl = parseInt(fecha.substring(2, 4));
+    const monthControl = parseInt(fecha.substring(0, 2));
+    // conbtrol pattern MM/YY
+    if(year > yearControl || ( year == yearControl && month > monthControl)) {
+      return { 'vencida': true };
     }
     return null;
   }
