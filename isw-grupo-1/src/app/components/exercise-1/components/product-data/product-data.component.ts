@@ -22,7 +22,7 @@ export class ProductDataComponent implements OnInit {
 
   initForm() {
     this.form = this.fb.group({
-      description: [ '', [ Validators.required ] ],
+      description: [ '', [ Validators.required, Validators.maxLength(200) ] ],
       ammount: [ '', [ Validators.required ] ],
       image: []
     })
