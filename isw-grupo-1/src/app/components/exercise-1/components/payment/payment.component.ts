@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit, OnChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CardPaymentType, CashPaymentType, Payment, ProductData } from '../../models';
 
@@ -7,7 +7,7 @@ import { CardPaymentType, CashPaymentType, Payment, ProductData } from '../../mo
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export class PaymentComponent {
+export class PaymentComponent implements OnChanges {
   constructor(private fb: FormBuilder) {}
 
   form: FormGroup;
@@ -16,26 +16,26 @@ export class PaymentComponent {
 
   @Input() productData: ProductData;
 
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm() {
-    this.form = this.fb.group({
-      isCash: [ false ],
-      ammountCash: [ '', [ this.validarMontoEfectivo ] ],
-      cardNumber: [ '', [ Validators.required, this.validarTarjeta ] ],
-      cardSecurity: [ '', [ Validators.required ] ],
-      fullName: [ '', [ Validators.required ] ],
-      expiration: [ '', [ Validators.required, this.validarVencimiento ] ]
-    })
-    this.ammountCash.disable();
+  ngOnChanges() {
+    if(this.productData) {
+      this.form = this.fb.group({
+        isCash: [ false ],
+        ammountCash: [ '', [ this.validarMontoEfectivo ] ],
+        cardNumber: [ '', [ Validators.required, this.validarTarjeta ] ],
+        cardSecurity: [ '', [ Validators.required ] ],
+        fullName: [ '', [ Validators.required ] ],
+        expiration: [ '', [ Validators.required, this.validarVencimiento ] ]
+      })
+      this.ammountCash.disable();
+    }
   }
 
   validarMontoEfectivo(control: AbstractControl): { [key: string]: boolean } | null {
-    const value = parseFloat(control.value);
-    if (value <= (this.productData.ammount + this.productData.deliveryAmount)) {
-      return { 'montoInvalido': true }
+    if(this.productData && this.productData != undefined) {
+      const value = parseFloat(control.value);
+      if (this.productData && this.productData.ammount && value <= (this.productData.ammount + this.productData.deliveryAmount)) {
+        return { 'montoInvalido': true }
+      }
     }
     return null;
   }

@@ -77,7 +77,7 @@ export class ProductDataComponent implements OnInit {
     if(this.form.valid) {
       this.submit.emit({
         description: this.description.value,
-        ammount: this.ammount.value,
+        ammount: parseFloat(this.ammount.value),
         imageName: this.image.value,
         arrayBuffer: this.imageUrl,
         deliveryAmount: Math.floor(100 + Math.random() * 700)

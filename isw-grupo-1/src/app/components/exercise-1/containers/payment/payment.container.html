@@ -1,4 +1,6 @@
-<app-payment
+<div *ngIf="(productData$ | async).description">
+  <app-payment
   (emitPayment)="onPaymentSubmit($event)"
   [productData]="productData$ | async"
-></app-payment>
+  ></app-payment>
+</div>

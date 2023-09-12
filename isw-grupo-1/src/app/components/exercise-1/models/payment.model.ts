@@ -9,7 +9,7 @@ export class CashPaymentType {
 }
 
 export class CardPaymentType {
-  cardNumber: number;
+  cardNumber: string;
   fullName: string;
   expiration: string;
   securityCode: number;

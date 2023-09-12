@@ -69,16 +69,17 @@
             src="https://www.visa.com.ar/content/dam/VCOM/regional/ve/unitedkingdom/home-page/images/uk-hp-hero-travel-1920x1080.jpeg"
             alt="Photo of a Shiba Inu"
           >
-          <mat-card-content>
+          <mat-card-content *ngIf="payment.cash || payment.card">
+            <mat-label><span>{{getPaymentDescription()}}</span></mat-label>
           </mat-card-content>
           <mat-card-actions class="d-flex justify-content-center">
-            <button [disabled]="!customerAdress || !customerAdress.street || payment" mat-button mat-raised-button (click)="redirectPayment()">Ir a seleccionar metodo de pago</button>
+            <button [disabled]="!customerAdress || !customerAdress.street || payment.cash || payment.card" mat-button mat-raised-button (click)="redirectPayment()">Ir a seleccionar metodo de pago</button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
     <div class="row sticky-button justify-content-center mx-0 px-0">
-      <button [disabled]="!payment" class="col-11 btn btn-lg">CONFIRMAR MI PEDIDO</button>
+      <button [disabled]="!payment.cash && !payment.card" class="col-11 btn btn-lg">CONFIRMAR MI PEDIDO</button>
     </div>
   </div>
 </div>

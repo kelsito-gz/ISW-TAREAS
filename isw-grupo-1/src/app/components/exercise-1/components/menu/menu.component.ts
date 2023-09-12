@@ -35,4 +35,12 @@ export class MenuComponent implements OnInit {
     this.router.navigate([ 'delivereat/producto' ]);
   }
 
+  getPaymentDescription(): string {
+    if(this.payment.isCash) {
+      return `Pagas en efectivo, con ${this.payment.cash.cashAmount}`;
+    } else {
+      return `Pagas con tu Visa terminada en ${this.payment.card.cardNumber.slice(-4)}`
+    }
+  }
+
 }

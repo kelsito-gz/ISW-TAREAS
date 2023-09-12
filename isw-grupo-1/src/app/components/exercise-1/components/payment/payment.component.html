@@ -17,10 +17,10 @@
               <mat-form-field class="width-100" color="primary">
                 <mat-label>Monto</mat-label>
                 <input matInput autocomplete="off" mask="0*.00" formControlName="ammountCash" />
-                <mat-error *ngIf="ammountCash.hasError('montoInvalido') && ammountCash.touched">Monto menor al indicado</mat-error>
+                <mat-error *ngIf="productData && ammountCash.hasError('montoInvalido') && ammountCash.touched">Monto menor al indicado</mat-error>
               </mat-form-field>
             </div>
-            <div class="col-12 col-md-4 col-lg-5">
+            <div class="col-12 col-md-4 col-lg-5" *ngIf="productData">
               <mat-label><span>Tu producto: </span>{{productData.description}}</mat-label>
               <mat-label><span>Monto del producto: </span>{{productData.ammount}}</mat-label>
               <mat-label><span>Monto del envio: </span>{{productData.deliveryAmount}}</mat-label>
@@ -60,7 +60,6 @@
           </div>
         </form>
       </mat-card>
-  
       <div class="row sticky-button justify-content-center mx-0 px-0">
         <button (click)="onPaymentSubmit()" [disabled]="!form.valid" class="btn btn-lg">CONFIRMAR MI FORMA DE PAGO</button>
       </div>
