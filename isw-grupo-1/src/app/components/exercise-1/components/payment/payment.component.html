@@ -20,7 +20,7 @@
                 <mat-error *ngIf="productData && ammountCash.hasError('montoInvalido') && ammountCash.touched">Monto menor al indicado</mat-error>
               </mat-form-field>
             </div>
-            <div class="col-12 col-md-4 col-lg-5" *ngIf="productData">
+            <div class="col-12 col-md-4 col-lg-5 d-flex flex-column" *ngIf="productData">
               <mat-label><span>Tu producto: </span>{{productData.description}}</mat-label>
               <mat-label><span>Monto del producto: </span>{{productData.ammount}}</mat-label>
               <mat-label><span>Monto del envio: </span>{{productData.deliveryAmount}}</mat-label>

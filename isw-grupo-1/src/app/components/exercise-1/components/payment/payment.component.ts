@@ -14,7 +14,7 @@ export class PaymentComponent implements OnChanges {
 
   @Output() emitPayment: EventEmitter<Payment> = new EventEmitter<Payment>();
 
-  @Input() productData: ProductData;
+  @Input() productData: ProductData = {} as ProductData;
 
   ngOnChanges() {
     if(this.productData) {
@@ -30,7 +30,7 @@ export class PaymentComponent implements OnChanges {
     }
   }
 
-  validarMontoEfectivo(control: AbstractControl): { [key: string]: boolean } | null {
+  validarMontoEfectivo = (control: AbstractControl): { [key: string]: boolean } | null => {
     if(this.productData && this.productData != undefined) {
       const value = parseFloat(control.value);
       if (this.productData && this.productData.ammount && value <= (this.productData.ammount + this.productData.deliveryAmount)) {
